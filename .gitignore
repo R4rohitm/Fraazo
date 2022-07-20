@@ -1,0 +1,22 @@
+/Frontend/fraazo-app/node_modules
+/Frontend/fraazo-app/.pnp
+/Frontend/fraazo-app.pnp.js
+
+# testing
+/Frontend/fraazo-app/coverage
+
+# production
+/Frontend/fraazo-app/build
+
+# misc
+/Frontend/fraazo-app/.DS_Store
+/Frontend/fraazo-app/.env.local
+/Frontend/fraazo-app/.env.development.local
+/Frontend/fraazo-app/.env.test.local
+/Frontend/fraazo-app/.env.production.local
+
+/Frontend/fraazo-app/npm-debug.log*
+/Frontend/fraazo-app/yarn-debug.log*
+/Frontend/fraazo-app/yarn-error.log*
+
+/Backend/node_modules
