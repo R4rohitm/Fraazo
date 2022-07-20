@@ -11,6 +11,10 @@ app.get("/", (req, res) => {
   return res.send("Fraazo Backend");
 });
 
+app.post("/", (req, res) => {
+  
+});
+
 const PORT = 8080;
 app.listen(PORT, async () => {
   console.log(`Server listening on port ${PORT}`);
