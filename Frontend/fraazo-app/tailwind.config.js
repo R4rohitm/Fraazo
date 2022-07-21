@@ -6,9 +6,6 @@ module.exports = {
       fontFamily: {
         Quicksand: ["Quicksand", "sans-serif"],
       },
-      animation: {
-        bounce2: "bounce 3s linear",
-      },
     },
   },
   plugins: [],
