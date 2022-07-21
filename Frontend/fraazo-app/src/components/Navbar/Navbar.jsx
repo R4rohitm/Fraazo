@@ -1,11 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDebouncedCallback } from "@react-hookz/web";
 import Location from "./Location";
+import SearchDiv from "./SearchDiv";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("Home");
+  const [searchQuery, setSearchQuery] = useState("");
   const [geoComponent, setGeocomponent] = useState(false);
+  const [searchData, setSearchData] = useState([]);
+  const [searchDivState, setSearchDivState] = useState(false);
+  const inputRef = useRef(null);
+
+  const onButtonClick = () => {
+    inputRef.current.value = "";
+  };
+
+  const searchDiv = () => {
+    if (searchQuery.length >= 1) {
+      setSearchDivState(true);
+    }
+  };
+
+  useEffect(() => {
+    const searchProducts = async () => {
+      if (searchQuery) {
+        try {
+          let response = await fetch(
+            `http://localhost:8080/items/search?q=${searchQuery}`
+          );
+          let data = await response.json();
+          console.log(data);
+          setSearchData(data);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    };
+
+    searchProducts();
+  }, [searchQuery]);
+
+  const onChangedDebounce = useDebouncedCallback(
+    (e) => setSearchQuery(e.target.value),
+    [],
+    500,
+    0
+  );
 
   return (
     <nav>
@@ -38,6 +80,11 @@ const Navbar = () => {
           </li>
           <li class="border w-2/4 h-12 rounded-full px-7 flex items-center justify-between gap-2 hover:text-[#000000]">
             <input
+              onChange={(e) => {
+                searchDiv();
+                onChangedDebounce(e);
+              }}
+              ref={inputRef}
               type="text"
               class="outline-none text-sm w-full h-full "
               placeholder="Find fresh vegetables, fruits and dairy..."
@@ -184,6 +231,25 @@ const Navbar = () => {
           </div>
         </div>
       </ul>
+      {searchDivState ? (
+        <div class="absolute bg-white w-[720px] h-96 z-40 border top-[60px] left-[25.5%] ml-[3px] flex flex-col gap-3 pt-2 overflow-y-scroll no-scrollbar">
+          <div class="cursor-pointer pr-5 flex flex-row-reverse">
+            <svg
+              onClick={() => {
+                setSearchDivState(false);
+                onButtonClick();
+                setSearchQuery("");
+              }}
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4  fill-[#4FBB90]"
+              viewBox="0 0 512 512"
+            >
+              <path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM175 208.1L222.1 255.1L175 303C165.7 312.4 165.7 327.6 175 336.1C184.4 346.3 199.6 346.3 208.1 336.1L255.1 289.9L303 336.1C312.4 346.3 327.6 346.3 336.1 336.1C346.3 327.6 346.3 312.4 336.1 303L289.9 255.1L336.1 208.1C346.3 199.6 346.3 184.4 336.1 175C327.6 165.7 312.4 165.7 303 175L255.1 222.1L208.1 175C199.6 165.7 184.4 165.7 175 175C165.7 184.4 165.7 199.6 175 208.1V208.1z" />
+            </svg>
+          </div>
+          <SearchDiv searchData={searchData} />
+        </div>
+      ) : null}
     </nav>
   );
 };
