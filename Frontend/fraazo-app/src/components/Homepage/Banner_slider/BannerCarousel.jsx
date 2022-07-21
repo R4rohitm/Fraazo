@@ -1,17 +1,17 @@
 import React from 'react'
 import styles from './BannerCarousel.module.css'
-import img4 from "../Images/img10.png";
-import img1 from "../Images/img7.png";
-import img3 from "../Images/img9.png";
-import img2 from "../Images/img8.png";
+import img4 from "../../Images/img10.png";
+import img1 from "../../Images/img7.png";
+import img3 from "../../Images/img9.png";
+import img2 from "../../Images/img8.png"
+import Slideshow from './Slider';
 
 function BannerCarousel() {
   return (
     <div>
         <div className={styles.slider}>
       <div className={styles.left_slider}>
-        <img src={img4} alt="slider" />
-        
+        <Slideshow />
       </div>
       <div className={styles.right_slider}>
         <div className={styles.right_slider-1}>
@@ -24,7 +24,7 @@ function BannerCarousel() {
           <img src={img3} alt="slider" className={styles.leftimg} />
         </div>
       </div>
-    </div>
+        </div>
     </div>
   )
 }

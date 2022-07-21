@@ -1,16 +1,27 @@
 import "./Slider.css"
-import LOGO1 from "../Images/img20.webp"
-import LOGO2 from "../Images/img21.webp"
-import LOGO3 from "../Images/img22.webp"
-import LOGO4 from "../Images/img23.webp"
-import LOGO5 from "../Images/img24.webp"
+import START1 from "../../Images/img_20.webp"
+import START2 from "../../Images/img_21.webp"
+import START3 from "../../Images/img_22.webp"
+import START4 from "../../Images/img_24.webp"
+import START5 from "../../Images/img_25.webp"
+import START6 from "../../Images/img_26.webp"
+import START7 from "../../Images/img_27.webp"
+import START8 from "../../Images/img_28.webp"
+import START9 from "../../Images/img_29.webp"
+import START10 from "../../Images/img_30.webp"
 import React from 'react'
 const images = [
-LOGO1, 
-LOGO2, 
-LOGO3,
-LOGO4,
-LOGO5
+START1, 
+START2, 
+START3,
+START4,
+START5,
+START6, 
+START7, 
+START8,
+START9,
+START10
+
 ];
 const delay = 2500;
  
@@ -42,6 +53,7 @@ function Slideshow() {
   }, [index]);
 
   return (
+    
     <div className="slideshow">
       <div
         className="slideshowSlider"
@@ -53,7 +65,7 @@ function Slideshow() {
             key={index}
             style={{ backgroundColor }}
           >
-            <img src={images[index]} style={{width: '100%', height: '380px'}} alt=""/>
+            <img src={images[index]} style={{width: '100%', height: '280px'}} alt=""/>
           </div>
         ))}
       </div>
