@@ -1,0 +1,23 @@
+.menu_page_container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    font-weight: 100;
+    font-family: Quicksand,sans-serif;
+    justify-content: center;
+}
+.menu_page_left_container{
+    margin-left:20px;
+    margin-top:20px;
+}
+.menu_page_right_container{
+    /* background-color: #111; */
+    margin:20px 20px;
+}
+.left_accordianPanel{
+    color:#666;
+    cursor: pointer;
+}
+.left_accordianPanel:hover{
+    color:#111;
+    font-size:17px
+}
