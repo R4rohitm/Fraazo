@@ -9,6 +9,7 @@ import Slideshow from './Slider';
 function BannerCarousel() {
   return (
     <div>
+      
         <div className={styles.slider}>
       <div className={styles.left_slider}>
         <Slideshow />
