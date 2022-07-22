@@ -19,6 +19,11 @@ const getItemsBySearch = async(req, res) => {
       return res.json(items);
 };
 
+const getBestDeals = async(req, res) => {
+    const items = await ItemsModel.aggregate([{$sample: {size: 15} }]);
+    return res.json(items);
+};
+
 const getVegetables = async(req, res) => {
     const items = await ItemsModel.find({category:"vegetables"});
     return res.json(items);
@@ -41,6 +46,7 @@ module.exports = {
   getAllItems,
   getItemById,
   getItemsBySearch,
+  getBestDeals,
   getVegetables,
   getFruits,
   createNewItem,

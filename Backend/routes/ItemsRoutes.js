@@ -3,6 +3,7 @@ const {
   getAllItems,
   getItemById,
   getItemsBySearch,
+  getBestDeals,
   getVegetables,
   getFruits,
   createNewItem,
@@ -13,6 +14,8 @@ const itemsRoutes = Router();
 itemsRoutes.get("/", getAllItems);
 
 itemsRoutes.get("/search", getItemsBySearch);
+
+itemsRoutes.get("/bestDeals", getBestDeals);
 
 itemsRoutes.get("/vegetables", getVegetables);
 
