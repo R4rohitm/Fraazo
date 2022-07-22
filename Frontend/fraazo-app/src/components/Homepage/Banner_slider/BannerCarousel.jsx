@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './BannerCarousel.module.css'
-import img4 from "../../Images/img10.png";
+
 import img1 from "../../Images/img7.png";
 import img3 from "../../Images/img9.png";
 import img2 from "../../Images/img8.png"
