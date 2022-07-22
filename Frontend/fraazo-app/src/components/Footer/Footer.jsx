@@ -54,12 +54,12 @@ export const Footer = () => {
                   
                   <div id={styles.footer_card_5} >
                  
-                   <div id={styles.colorText}> <HiOutlineMail id="footer_card_10" />    support@fraazo.com</div>
+                   <div id={styles.colorText} > <HiOutlineMail  />support@fraazo.com</div>
                   </div>
                 </div>
 
                 <div id={styles.colorText}>
-                <HiPhone />    +91 9152291522
+                     <HiPhone /> +91 9152291522
                 </div>
                 <div>
                   <h3 id={styles.footer_card_5}>
