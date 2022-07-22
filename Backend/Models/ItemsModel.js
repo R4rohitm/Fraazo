@@ -2,7 +2,7 @@ const {Schema, model, models} = require('mongoose');
 
 const ItemsSchema = new Schema({
   name: { type: String, required: [true, "Please enter your name"] },
-  qty: { type: String, required: [[true, "Please enter product selling quantity"]] },
+  qty: { type: String, required: [true, "Please enter product selling quantity"]},
   image: {
     type: String,
     default:
