@@ -1,33 +1,28 @@
-const {Router} = require('express');;
-const ItemsModel = require("../Models/ItemsModel");
+const { Router } = require("express");
+const {
+  getAllItems,
+  getItemById,
+  getItemsBySearch,
+  getBestDeals,
+  getVegetables,
+  getFruits,
+  createNewItem,
+} = require("../Controllers/ItemsController");
 
 const itemsRoutes = Router();
 
-itemsRoutes.get("/", async (req, res) => {
-  const items = await ItemsModel.find({});
-  return res.json(items);
-});
+itemsRoutes.get("/", getAllItems);
 
-itemsRoutes.get("/:id", async (req, res) => {
-  const {id} = req.params;
-  const items = await ItemsModel.findOne({_id:id});
-  return res.json(items);
-});
+itemsRoutes.get("/search", getItemsBySearch);
 
-itemsRoutes.get("/search", async (req, res) => {
-  const query = req.query.q;
-  const items = await ItemsModel.find({
-    name: { $regex: new RegExp(`${query}*`), $options: "gi" },
-  });
-  return res.json(items);
-});
+itemsRoutes.get("/bestDeals", getBestDeals);
 
-itemsRoutes.post("/", async (req, res) => {
-  const items = await ItemsModel({...req.body});
-  items.save((err, items) => {
-    if(err) return res.status(500).send(err);
-    else return res.status(201).json(items);
-  });
-});
+itemsRoutes.get("/vegetables", getVegetables);
+
+itemsRoutes.get("/fruits", getFruits);
+
+itemsRoutes.get("/:id", getItemById);
+
+itemsRoutes.post("/", createNewItem);
 
 module.exports = itemsRoutes;
