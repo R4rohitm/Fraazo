@@ -2,7 +2,7 @@ import React from 'react'
 
 const Caraousel = () => {
   return (
-    <div>Caraousel</div>
+    <div>Hi Sachin</div>
   )
 }
 
