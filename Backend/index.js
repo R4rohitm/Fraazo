@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connection = require('./Database/db');
 
+const authRoutes = require("./routes/AuthRoutes");
 const itemsRoutes = require("./routes/ItemsRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const cartRoutes = require("./routes/CartRoutes");
@@ -12,11 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/items", itemsRoutes);
 app.use("/cart", cartRoutes);
 app.use("/order", orderRoutes);
-
 
 app.get("/", (req, res) => {
   return res.send("Fraazo Backend");
