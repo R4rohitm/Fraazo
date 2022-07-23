@@ -8,7 +8,7 @@ Goal behind the project was to create a full stack clone of the KFC website as c
 This project was built by a team of 6 developers in 5 Days. 
 </p>
 
-- [Click Here](https://clone-kfc.netlify.app/ "KFC Clone") to view the deployed website.
+<!-- [Click Here](https://clone-kfc.netlify.app/ "KFC Clone") to view the deployed website. --->
 
 <p>
 Fraazo was launched in 2016 as a fresh produce store in the posh locality of Powai with a clear vision of serving the customers with farm-fresh groceries delivered at the doorstep.
