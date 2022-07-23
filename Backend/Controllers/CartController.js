@@ -21,7 +21,7 @@ const getCartByUserId = async (req, res) => {
 };
 
 const createNewCartItem = async(req, res) => {
-    const cart = await CartModel({...req.body, quantity:1}); [{}, {}, {}]
+    const cart = await CartModel({...req.body, quantity:1}); 
     cart.save((err, cart) => {
         if(err) return res.status(500).send(err);
         else res.status(200).send("Cart Data created successfully!");

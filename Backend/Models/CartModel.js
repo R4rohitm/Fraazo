@@ -1,12 +1,19 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 
-const CartItemModel = require("./CartItemModel");
-
 const CartSchema = new Schema(
   {
     userId: { type: SchemaTypes.ObjectId, required: true },
-    items: [{type: SchemaTypes.ObjectId, ref:
-      CartItemModel}], 
+    name: { type: String, required: [true, "Please enter your name"] },
+    qty: {
+      type: String,
+      required: [true, "Please enter product selling quantity"],
+    },
+    image: {
+      type: String,
+      default:
+        "https://webasset.fraazo.com/production/b70a67f4e825e3d388ac4466952c20a8.svg",
+    },
+    price: { type: String, required: [true, "Please enter a price"] },
   },
   { timestamps: true }
 );
