@@ -32,7 +32,7 @@ const Location = (props) => {
 
   return (
     <div class="w-full fixed top-0 left-0 bottom-0 flex z-40 ">
-      <div class=" w-[30%] border  ">
+      <div class=" w-[30%] bg-white border  ">
         <div>
           <img
             onClick={() => setGeocomponent(false)}

@@ -12,7 +12,6 @@ function BannerCarousel() {
         <div className={styles.left_slider}>
           <Slideshow />
         </div>
-
       <div className={styles.right_slider}>
           <div className={styles.right_slider-1}>
             <img src={img1} alt="slider" className={styles.leftimg} />
