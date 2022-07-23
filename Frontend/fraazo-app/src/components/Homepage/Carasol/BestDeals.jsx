@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styles from "./carasol.module.css"
 import { AiOutlineShoppingCart } from 'react-icons/ai'
+// import { BsArrowLeftSquare,BsArrowRightSquare } from 'react-icons/bs'
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css" ;
@@ -25,7 +26,8 @@ function BestDeals() {
         </div>
         
         <hr className={styles.bestDeals_main3}/>
-        <Slider dots={false} slidesToShow={5} slidesToScroll={5} autoPlay={true} autoPlaySpeed={500} >
+       {/* <div className={styles.product_each_items_priceButton_leftArrow}> <BsArrowLeftSquare /></div> */}
+        <Slider dots={false} slidesToShow={5} slidesToScroll={5} autoPlay={true} autoPlaySpeed={500}  >
        {todos.map((data)=>(
         
             <div className={styles.product_each_items}>
@@ -51,6 +53,7 @@ function BestDeals() {
             
         ))}
          </Slider>
+         {/* <div className={styles.product_each_items_priceButton_rightArrow}><BsArrowRightSquare /></div> */}
     </div>
   )
 }
