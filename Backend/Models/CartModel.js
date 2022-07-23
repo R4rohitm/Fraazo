@@ -20,6 +20,3 @@ const CartSchema = new Schema(
 
 const CartModel = new model("cart", CartSchema);
 module.exports = CartModel;
-
-
-//Add to cart -> add to items array -> if already existing , inc qty 
