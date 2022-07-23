@@ -1,8 +1,72 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import EnterEmail from "./Welcome/EnterEmail";
 import EnterOTP from "./Welcome/EnterOTP";
+import { UserContext } from "../../context/UserContext";
 
-const Welcome = ({ handleLoginComponent }) => {
+const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
+  const [otpComponent, setOtpComponent] = useState(false);
+  const [email, setEmail] = useState({});
+  const [loader, setLoader] = useState(false);
+  const [ae, setAe] = useState({ yes: false, no: true });
+  const [otpResponse, setOtpResponse] = useState({ bool: false, data: "" });
+
+  const { setAlreadyExists } = useContext(UserContext);
+
+  const sendOTP = async (email) => {
+    console.log(email);
+    setLoader(true);
+    try {
+      let response = await fetch(`http://localhost:8080/auth/OTP`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(email),
+      });
+
+      let data = await response.json();
+      console.log(data.alreadyExists);
+      if (data.alreadyExists === true) {
+        setAe({ yes: true, no: false });
+      } else {
+        setAe({ yes: false, no: true });
+      }
+
+      setOtpComponent(true);
+    } catch (e) {
+      console.log("e");
+    }
+    setLoader(false);
+  };
+
+  const verifyOTP = async (otp, email) => {
+    console.log(otp, email);
+    setLoader(true);
+    try {
+      let response = await fetch(`http://localhost:8080/auth/verifyOTP`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          otp,
+          email: email.email,
+        }),
+      });
+
+      let data = await response.json();
+      console.log(data);
+
+      if (data.msg === "Verified") {
+        setAlreadyExists(ae);
+      }
+      setLoginComponent({
+        login: false,
+        welcome: false,
+      });
+      setOtpResponse({ bool: true, data: data.msg });
+    } catch (e) {
+      console.log(e);
+    }
+    setLoader(false);
+  };
+
   return (
     <div>
       <div>
@@ -24,8 +88,23 @@ const Welcome = ({ handleLoginComponent }) => {
         </div>
       </div>
       <div class="w-full">
-        {/* <EnterEmail /> */}
-        <EnterOTP />
+        {otpComponent ? (
+          <EnterOTP
+            loader={loader}
+            email={email}
+            sendOTP={sendOTP}
+            setOtpComponent={setOtpComponent}
+            verifyOTP={verifyOTP}
+            otpResponse={otpResponse}
+          />
+        ) : (
+          <EnterEmail
+            loader={loader}
+            email={email}
+            sendOTP={sendOTP}
+            setEmail={setEmail}
+          />
+        )}
       </div>
     </div>
   );
