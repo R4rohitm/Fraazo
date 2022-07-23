@@ -20,10 +20,16 @@ const addNewCartItem = async (req, res) => {
 
 const addMultipleCartItems = async (req, res) => {
   const cartItems = await CartModel.insertMany(req.body);
-  cartItem.save((err, item) => {
+  cartItems.save((err, item) => {
     if (err) return res.status(500).send(err);
     else return res.status(201).send("Item added to Cart");
   });
+};
+
+const countUserCartItems = async (req, res) => {
+  const { userId } = req.params;
+  const count = await CartModel.countDocuments({ userId });
+  return res.status(200).send(count);
 };
 
 const changeQuantity = async (req, res) => {
@@ -54,4 +60,5 @@ module.exports = {
   addMultipleCartItems,
   changeQuantity,
   deleteCartItem,
+  countUserCartItems,
 };

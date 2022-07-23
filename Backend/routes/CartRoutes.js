@@ -6,11 +6,14 @@ const {
   addMultipleCartItems,
   changeQuantity,
   deleteCartItem,
+  countUserCartItems,
 } = require("../Controllers/CartController");
 
 const cartRoutes = Router();
 
 cartRoutes.get("/user/:userId", getCartByUserId);
+
+cartRoutes.get("/countItems/:userId", countUserCartItems);
 
 cartRoutes.post("/", addNewCartItem );
 
