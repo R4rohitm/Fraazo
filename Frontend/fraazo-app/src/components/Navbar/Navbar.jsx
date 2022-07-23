@@ -157,7 +157,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute top-28 pt-8 -ml-5 w-28 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-28 pt-8 -ml-5 w-36 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="fruits/exotic_fruits">
                 Exotic Fruits
@@ -193,7 +193,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="vegetables/daily_veggies">
                 Daily Veggies
