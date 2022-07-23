@@ -2,9 +2,9 @@ const { Router } = require("express");
 
 const orderRoutes = Router();
 
-orderRoutes.get("/", (req, routes) => {});
+// orderRoutes.get("/user/:userId", getUserOrders);
 
-orderRoutes.get("/id", (req, routes) => {});
+orderRoutes.get("/:id", (req, routes) => {});
 
 orderRoutes.post("/", (req, routes) => {});
 

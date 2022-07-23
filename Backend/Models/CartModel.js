@@ -1,9 +1,12 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 
+const CartItemModel = require("./CartItemModel");
+
 const CartSchema = new Schema(
   {
     userId: { type: SchemaTypes.ObjectId, required: true },
-    items: [{type:Object}],
+    items: [{type: SchemaTypes.ObjectId, ref:
+      CartItemModel}], 
   },
   { timestamps: true }
 );

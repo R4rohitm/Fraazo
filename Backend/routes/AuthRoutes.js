@@ -22,7 +22,7 @@ const transport = NodeMailer.createTransport({
 });
 
 authRoutes.post("/OTP", async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.body;     
   
   function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -46,7 +46,7 @@ authRoutes.post("/OTP", async (req, res) => {
   const userExists = await UsersModel.findOne({ email });
   if (userExists) {
     transport
-      .sendMail({
+      .sendMail({  
         from: process.env.NODEMAILER_EMAIL,
         to: email,
         subject: "TX-Fraazo",
@@ -80,8 +80,9 @@ authRoutes.post("/OTP", async (req, res) => {
 authRoutes.post("/verifyOTP", async(req, res) => {
     const {email, otp} = req.body;
     const otpHash = await OTPModel.findOne({email, otp});
+    const user = await UsersModel.findOne({email});
     if(otpHash.otp === otp){
-        return res.status(200).send("Verified");
+        return res.status(200).send({msg:"Verified", user:user._id}); 
     }else {
         return res.status(404).send("OTP Expired, Please try again!");
     }
