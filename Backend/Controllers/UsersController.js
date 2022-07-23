@@ -37,8 +37,13 @@ const updateUserById = async(req,res) => {
 }
 
 const createNewUser = async(req,res) => {
-    const {mobile, email, name} = req.body;
-    const userExists = await UsersModel.findOne({mobile: mobile, email: email, name: name}); 
+    const {mobile, email, firstname, lastname} = req.body;
+    const userExists = await UsersModel.findOne({
+      mobile: mobile,
+      email: email,
+      firstname:firstname,
+      lastname:lastname,
+    }); 
     if(userExists){
      return res.status(400).json({error: "User already exists"});
     }else {
