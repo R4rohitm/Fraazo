@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "@react-hookz/web";
 import Location from "./Location";
 import SearchDiv from "./SearchDiv";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [geoComponent, setGeocomponent] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const [searchDivState, setSearchDivState] = useState(false);
+  const [cartComponent, setCartComponent] = useState(false);
   const inputRef = useRef(null);
 
   const onButtonClick = () => {
@@ -98,7 +100,10 @@ const Navbar = () => {
             </svg>
           </li>
           <li class="group">
-            <button class="flex gap-1 text-sm items-cente group-hover:text-[#000000] ">
+            <button
+              onClick={() => setCartComponent(true)}
+              class="flex gap-1 text-sm items-cente group-hover:text-[#000000] "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4 fill-[#999999] group-hover:fill-black "
@@ -250,6 +255,7 @@ const Navbar = () => {
           <SearchDiv searchData={searchData} />
         </div>
       ) : null}
+      {cartComponent ? <Cart setCartComponent={setCartComponent} /> : null}
     </nav>
   );
 };
