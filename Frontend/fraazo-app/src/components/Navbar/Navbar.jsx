@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "@react-hookz/web";
 import Location from "./Location";
 import SearchDiv from "./SearchDiv";
+import Cart from "./Cart";
+import Welcome from "../User/Welcome";
+import WelcomeUser from "../User/WelcomeUser";
+import RegisterUser from "../User/RegisterUser";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,6 +15,12 @@ const Navbar = () => {
   const [geoComponent, setGeocomponent] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const [searchDivState, setSearchDivState] = useState(false);
+  const [cartComponent, setCartComponent] = useState(false);
+  const [loginComponent, setLoginComponent] = useState({
+    login: false,
+    welcome: false,
+    welcomeuser: false,
+  });
   const inputRef = useRef(null);
 
   const onButtonClick = () => {
@@ -21,6 +31,28 @@ const Navbar = () => {
     if (searchQuery.length >= 1) {
       setSearchDivState(true);
     }
+  };
+
+  const handleWelcomeComponent = () => {
+    setLoginComponent({
+      login: true,
+      welcome: true,
+      welcomeuser: false,
+    });
+  };
+  const handleWelcomeUserComponent = () => {
+    setLoginComponent({
+      login: true,
+      welcome: false,
+      welcomeuser: true,
+    });
+  };
+  const handleLoginComponent = () => {
+    setLoginComponent({
+      login: false,
+      welcome: false,
+      welcomeuser: false,
+    });
   };
 
   useEffect(() => {
@@ -98,7 +130,10 @@ const Navbar = () => {
             </svg>
           </li>
           <li class="group">
-            <button class="flex gap-1 text-sm items-cente group-hover:text-[#000000] ">
+            <button
+              onClick={() => setCartComponent(true)}
+              class="flex gap-1 text-sm items-cente group-hover:text-[#000000] "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4 fill-[#999999] group-hover:fill-black "
@@ -122,7 +157,10 @@ const Navbar = () => {
             </button>
           </li>
           <li class="group">
-            <button class="flex gap-1 text-sm items-center group-hover:text-[#000000]">
+            <button
+              onClick={() => handleWelcomeComponent()}
+              class="flex gap-1 text-sm items-center group-hover:text-[#000000]"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4 fill-[#999999] group-hover:fill-black"
@@ -157,7 +195,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute top-28 pt-8 -ml-5 w-28 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-28 pt-8 -ml-5 w-36 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="fruits/exotic_fruits">
                 Exotic Fruits
@@ -193,7 +231,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="vegetables/daily_veggies">
                 Daily Veggies
@@ -250,6 +288,20 @@ const Navbar = () => {
           <SearchDiv searchData={searchData} />
         </div>
       ) : null}
+      {cartComponent ? <Cart setCartComponent={setCartComponent} /> : null}
+
+      {/* {loginComponent.login ? (
+        <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
+          <Welcome handleLoginComponent={handleLoginComponent} />
+        </div>
+      ) : loginComponent.welcomeuser ? (
+        <div class="fixed top-[50%] left-[50%] shadow-xl z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
+          <WelcomeUser />
+        </div>
+      ) : null} */}
+      <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
+        <RegisterUser />
+      </div>
     </nav>
   );
 };
