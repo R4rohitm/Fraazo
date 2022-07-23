@@ -4,6 +4,9 @@ import { useDebouncedCallback } from "@react-hookz/web";
 import Location from "./Location";
 import SearchDiv from "./SearchDiv";
 import Cart from "./Cart";
+import Welcome from "../User/Welcome";
+import WelcomeUser from "../User/WelcomeUser";
+import RegisterUser from "../User/RegisterUser";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -13,6 +16,11 @@ const Navbar = () => {
   const [searchData, setSearchData] = useState([]);
   const [searchDivState, setSearchDivState] = useState(false);
   const [cartComponent, setCartComponent] = useState(false);
+  const [loginComponent, setLoginComponent] = useState({
+    login: false,
+    welcome: false,
+    welcomeuser: false,
+  });
   const inputRef = useRef(null);
 
   const onButtonClick = () => {
@@ -23,6 +31,28 @@ const Navbar = () => {
     if (searchQuery.length >= 1) {
       setSearchDivState(true);
     }
+  };
+
+  const handleWelcomeComponent = () => {
+    setLoginComponent({
+      login: true,
+      welcome: true,
+      welcomeuser: false,
+    });
+  };
+  const handleWelcomeUserComponent = () => {
+    setLoginComponent({
+      login: true,
+      welcome: false,
+      welcomeuser: true,
+    });
+  };
+  const handleLoginComponent = () => {
+    setLoginComponent({
+      login: false,
+      welcome: false,
+      welcomeuser: false,
+    });
   };
 
   useEffect(() => {
@@ -127,7 +157,10 @@ const Navbar = () => {
             </button>
           </li>
           <li class="group">
-            <button class="flex gap-1 text-sm items-center group-hover:text-[#000000]">
+            <button
+              onClick={() => handleWelcomeComponent()}
+              class="flex gap-1 text-sm items-center group-hover:text-[#000000]"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4 fill-[#999999] group-hover:fill-black"
@@ -256,6 +289,19 @@ const Navbar = () => {
         </div>
       ) : null}
       {cartComponent ? <Cart setCartComponent={setCartComponent} /> : null}
+
+      {/* {loginComponent.login ? (
+        <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
+          <Welcome handleLoginComponent={handleLoginComponent} />
+        </div>
+      ) : loginComponent.welcomeuser ? (
+        <div class="fixed top-[50%] left-[50%] shadow-xl z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
+          <WelcomeUser />
+        </div>
+      ) : null} */}
+      <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
+        <RegisterUser />
+      </div>
     </nav>
   );
 };
