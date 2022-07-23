@@ -1,16 +1,33 @@
 import React from "react";
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 const RegisterUser = () => {
-  const [details, setDetails] = useState({});
+  const [formData, setFormData] = useState();
+
+  const { createUser, setAlreadyExists } = useContext(UserContext);
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setDetails({
-      ...details,
+    setFormData({
+      ...formData,
       [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    createUser(formData);
+    setAlreadyExists({
+      yes: false,
+      no: false,
+    });
+  };
+
+  const handleX = () => {
+    setAlreadyExists({
+      yes: false,
+      no: false,
     });
   };
 
@@ -19,6 +36,7 @@ const RegisterUser = () => {
       <div class="h-24">
         <div class="w-[590px] flex flex-row-reverse">
           <svg
+            onClick={() => handleX()}
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 cursor-pointer"
             viewBox="0 0 320 512"
@@ -33,20 +51,25 @@ const RegisterUser = () => {
           Register now for Unbelievable Discounts.
         </div>
       </div>
-      <form class="w-full h-[380px] flex flex-col gap-6 text-[15px] mt-5 font-semibold text-[#999999] ">
+      <form
+        onSubmit={handleSubmit}
+        class="w-full h-[380px] flex flex-col gap-6 text-[15px] mt-5 font-semibold text-[#999999] "
+      >
         <div class="flex flex-col gap-10">
           <div class="flex justify-between items-center">
             <input
-              class="w-[40%] h-[35px] border-b border-[#999999] focus:outline-none"
+              class="w-[40%] h-[35px] border-b border-[#999999] focus:outline-none focus:text-black"
               type="text"
               placeholder="First Name"
               name="firstname"
+              onChange={handleChange}
             />
             <input
               class="w-[40%] h-[35px] border-b border-[#999999] focus:outline-none"
               type="text"
               placeholder="Last Name"
               name="lastname"
+              onChange={handleChange}
             />
           </div>
           <div class="flex justify-between items-center">
@@ -55,6 +78,7 @@ const RegisterUser = () => {
               type="email"
               placeholder="Email Id"
               name="email"
+              onChange={handleChange}
             />
           </div>
           <div class="flex justify-between items-center">
@@ -63,6 +87,7 @@ const RegisterUser = () => {
               type="number"
               placeholder="Mobile Number"
               name="mobile"
+              onChange={handleChange}
             />
           </div>
           <div class="flex justify-start items-center font-normal gap-5">
@@ -71,7 +96,9 @@ const RegisterUser = () => {
               <input
                 class="w-4 h-4 border-[#4FBB90] text-[#4FBB90] bg-gray-100 focus:ring-[#4FBB90]"
                 type="radio"
-                name="Mr."
+                name="title"
+                value={"Mr."}
+                onChange={handleChange}
               />
               <p>Mr.</p>
             </div>
@@ -79,23 +106,27 @@ const RegisterUser = () => {
               <input
                 class="w-4 h-4 border-[#4FBB90] text-[#4FBB90] bg-gray-100 focus:ring-[#4FBB90]"
                 type="radio"
-                name="Mrs."
-              />{" "}
+                name="title"
+                value={"Mrs."}
+                onChange={handleChange}
+              />
               <p>Mrs.</p>
             </div>
             <div class="flex justify-start items-center text-[16px] text-[#4FBB90] gap-3">
               <input
                 class="w-4 h-4 border-[#4FBB90] text-[#4FBB90] bg-gray-100 focus:ring-[#4FBB90]"
                 type="radio"
-                name="Miss"
-              />{" "}
+                name="title"
+                value="Miss"
+                onChange={handleChange}
+              />
               <p>Miss</p>
             </div>
           </div>
         </div>
         <div class="w-full h-12 mt-10 flex justify-center items-center">
           <div class="w-40 text-white font-bold flex justify-center items-center h-full px-6 rounded-full bg-[#43C6AC]">
-            Submit
+            <input type="submit" value="Submit" />
           </div>
         </div>
       </form>

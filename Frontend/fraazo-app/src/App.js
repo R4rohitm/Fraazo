@@ -5,17 +5,20 @@ import MainRoutes from "./routes/Mainroutes";
 
 import Homepage from "./components/Homepage/Homepage";
 import { CartProvider } from "./context/CartContext";
+import { UserProvider } from "./context/UserContext";
 
 // import MainRoutes from "./routes/Mainroutes.jsx";
 
 function App() {
   return (
-    <CartProvider>
-      <div>
-        <MainRoutes />
-        <Homepage />
-      </div>
-    </CartProvider>
+    <>
+      <UserProvider>
+        <CartProvider>
+          <MainRoutes />
+          <Homepage />
+        </CartProvider>
+      </UserProvider>
+    </>
   );
 }
 

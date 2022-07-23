@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const WelcomeUser = () => {
+const WelcomeUser = ({ setAlreadyExists }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      setAlreadyExists({
+        yes: false,
+        no: false,
+      });
+    }, 3500);
+  });
+
   return (
     <div class="w-full h-full flex flex-col justify-around items-center ">
       <div class="w-full h-7 tracking-wide flex justify-center items-center text-[20px] font-semibold">
