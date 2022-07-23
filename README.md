@@ -5,7 +5,7 @@
 <p>
 This was a collaborative construct week project at Masai School.
 Goal behind the project was to create a full stack clone of the Fraazo website as close as possible to the original one with all the major functionalities of this website, such as  Authentication, Landing Page & Food Gallery, Menu, User Cart, Checkout, Payment Gateway.
-This project was built by a team of 6 developers in 5 Days. 
+This project was built by a team of 5 developers in 5 Days. 
 </p>
 
 <!-- [Click Here](https://clone-kfc.netlify.app/ "KFC Clone") to view the deployed website. --->
