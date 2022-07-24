@@ -34,18 +34,17 @@ const countUserCartItems = async (req, res) => {
 
 const changeQuantity = async (req, res) => {
   let { id } = req.params;
-  if (req.body.quantity === 0) {
-    await CartModel.deleteOne({ _id: id });
-    return res.send("Cart is Empty");
-  }
   let { op } = req.body;
   if (op == "inc") {
     await CartModel.updateOne({ _id: id }, { $inc: { quantity: 1 } });
   } else if (op == "dec") {
     await CartModel.updateOne({ _id: id }, { $inc: { quantity: -1 } });
   }
-  let cart = await CartModel.find({ _id: id });
-  return res.json(cart);
+  let cart = await CartModel.findOne({ _id: id });
+  if(cart.quantity === 0){
+     await CartModel.deleteOne({ _id: id });
+     return res.send("Cart is Empty");
+  }else return res.json(cart);
 };
 
 const deleteCartItem = async (req, res) => {

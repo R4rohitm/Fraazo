@@ -14,6 +14,7 @@ const CartSchema = new Schema(
         "https://webasset.fraazo.com/production/b70a67f4e825e3d388ac4466952c20a8.svg",
     },
     price: { type: String, required: [true, "Please enter a price"] },
+    quantity: Number,
   },
   { timestamps: true }
 );
