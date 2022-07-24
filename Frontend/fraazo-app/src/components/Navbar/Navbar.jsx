@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDebouncedCallback } from "@react-hookz/web";
 import Location from "./Location";
@@ -7,6 +7,7 @@ import Cart from "./Cart";
 import Welcome from "../User/Welcome";
 import WelcomeUser from "../User/WelcomeUser";
 import RegisterUser from "../User/RegisterUser";
+import { UserContext } from "../../context/UserContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,9 +20,9 @@ const Navbar = () => {
   const [loginComponent, setLoginComponent] = useState({
     login: false,
     welcome: false,
-    welcomeuser: false,
   });
   const inputRef = useRef(null);
+  const { alreadyExists, setAlreadyExists } = useContext(UserContext);
 
   const onButtonClick = () => {
     inputRef.current.value = "";
@@ -37,21 +38,13 @@ const Navbar = () => {
     setLoginComponent({
       login: true,
       welcome: true,
-      welcomeuser: false,
     });
   };
-  const handleWelcomeUserComponent = () => {
-    setLoginComponent({
-      login: true,
-      welcome: false,
-      welcomeuser: true,
-    });
-  };
+
   const handleLoginComponent = () => {
     setLoginComponent({
       login: false,
       welcome: false,
-      welcomeuser: false,
     });
   };
 
@@ -290,18 +283,22 @@ const Navbar = () => {
       ) : null}
       {cartComponent ? <Cart setCartComponent={setCartComponent} /> : null}
 
-      {/* {loginComponent.login ? (
+      {loginComponent.login ? (
         <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
-          <Welcome handleLoginComponent={handleLoginComponent} />
+          <Welcome
+            setLoginComponent={setLoginComponent}
+            handleLoginComponent={handleLoginComponent}
+          />
         </div>
-      ) : loginComponent.welcomeuser ? (
+      ) : alreadyExists.yes ? (
         <div class="fixed top-[50%] left-[50%] shadow-xl z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
-          <WelcomeUser />
+          <WelcomeUser setAlreadyExists={setAlreadyExists} />
         </div>
-      ) : null} */}
-      <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
-        <RegisterUser />
-      </div>
+      ) : alreadyExists.no ? (
+        <div class="fixed top-[50%] shadow-2xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
+          <RegisterUser />
+        </div>
+      ) : null}
     </nav>
   );
 };

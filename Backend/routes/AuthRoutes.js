@@ -22,16 +22,17 @@ const transport = NodeMailer.createTransport({
 });
 
 authRoutes.post("/OTP", async (req, res) => {
-  const { email } = req.body;     
-  
+  const { email } = req.body;
+  console.log(email);
+
   function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   const otp = random(100000, 999999);
 
-  const OTP = await OTPModel({email, otp});
+  const OTP = await OTPModel({ email, otp });
   OTP.save((err, otp) => {
-    if(err) console.log(err);
+    if (err) console.log(err);
     else console.log(otp);
   });
 
@@ -46,14 +47,16 @@ authRoutes.post("/OTP", async (req, res) => {
   const userExists = await UsersModel.findOne({ email });
   if (userExists) {
     transport
-      .sendMail({  
+      .sendMail({
         from: process.env.NODEMAILER_EMAIL,
         to: email,
         subject: "TX-Fraazo",
         html: template({ otp: otp }),
       })
       .then((response) => {
-        return res.status(200).send({message:"OTP sent to Email", alreadyExists: true});
+        return res
+          .status(200)
+          .send({ message: "OTP sent to Email", alreadyExists: true });
       })
       .catch((err) => {
         return res.status(401).send("Something went wrong!");
@@ -74,7 +77,7 @@ authRoutes.post("/OTP", async (req, res) => {
       .catch((err) => {
         return res.status(401).send("Something went wrong!");
       });
-    }
+  }
 });
 
 authRoutes.post("/verifyOTP", async(req, res) => {
