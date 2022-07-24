@@ -112,7 +112,7 @@ authRoutes.post("/register", async (req, res) => {
     });
     newUser.save((err, user) => {
       if (err) return res.status(500).send(err);
-      else return res.status(200).send("New user added!");
+      else return res.status(200).send(user);
     });
   }
 });
