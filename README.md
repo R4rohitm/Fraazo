@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 ## Fraazo Clone
 
 ---
@@ -80,3 +82,4 @@ ___
 - Sachin Smp
 - Himanshu Singh
 - Niraj Pal
+>>>>>>> f0d08ae77fc6cc2bbd9cf42930b3e6d0ac74bd41

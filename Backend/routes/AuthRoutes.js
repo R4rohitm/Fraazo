@@ -80,16 +80,16 @@ authRoutes.post("/OTP", async (req, res) => {
   }
 });
 
-authRoutes.post("/verifyOTP", async (req, res) => {
-  const { email, otp } = req.body;
-  console.log(email, otp);
-  const otpHash = await OTPModel.findOne({ email, otp });
-  const user = await UsersModel.findOne({ email });
-  if (otpHash.otp === otp) {
-    return res.status(200).send({ msg: "Verified", user: user._id });
-  } else {
-    return res.status(404).send("OTP Expired, Please try again!");
-  }
+authRoutes.post("/verifyOTP", async(req, res) => {
+    const {email, otp} = req.body;
+    const otpHash = await OTPModel.findOne({email, otp});
+    if (otpHash.otp == otp) {
+      const user = await UsersModel.findOne({ email });
+      if(user?.email) return res.status(200).send({ msg: "Verified", user: user._id });
+      else return res.status(200).send({ msg: "Verified, needs to Register" });
+    } else {
+      return res.status(404).send("OTP Expired, Please try again!");
+    }
 });
 
 authRoutes.post("/register", async (req, res) => {
