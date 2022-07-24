@@ -1,9 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import HelpAndSupport from "./HelpAndSupport";
 import InviteAFriend from "./InviteAFriend";
 import EditUser from "./EditUser";
+import MyCredits from "./MyCredits";
+import MyOrders from "./MyOrders";
 
 const Account = () => {
+  const [loader, setLoader] = useState(false);
+  const [componentsState, setComponentsState] = useState({
+    myorders: true,
+    mycredits: false,
+    inviteafriends: false,
+    helpandsupport: false,
+  });
+
+  const handleMyOrder = () => {
+    setComponentsState({
+      myorders: true,
+      mycredits: false,
+      inviteafriends: false,
+      helpandsupport: false,
+    });
+  };
+
+  const handleMyCredits = () => {
+    setComponentsState({
+      myorders: false,
+      mycredits: true,
+      inviteafriends: false,
+      helpandsupport: false,
+    });
+  };
+  const handleInviteAFriend = () => {
+    setComponentsState({
+      myorders: false,
+      mycredits: false,
+      inviteafriends: true,
+      helpandsupport: false,
+    });
+  };
+  const handleHelpAndSupport = () => {
+    setComponentsState({
+      myorders: false,
+      mycredits: false,
+      inviteafriends: false,
+      helpandsupport: true,
+    });
+  };
+
+  const handleLogout = () => {
+    setLoader(true);
+    setTimeout(() => {
+      localStorage.removeItem("userId");
+      setLoader(false);
+    }, 2000);
+  };
   return (
     <div class="border h-[550px] w-full flex gap-7 bg-[#FBFBFB] ">
       {/* left div */}
@@ -28,7 +79,10 @@ const Account = () => {
           </div>
         </div>
         <div class=" h-[330px] font-Quicksand pt-6">
-          <div class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border">
+          <div
+            onClick={handleMyOrder}
+            class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4"
@@ -38,17 +92,26 @@ const Account = () => {
             </svg>
             <p>My Orders</p>
           </div>
-          <div class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4"
-              viewBox="0 0 512 512"
-            >
-              <path d="M448 32C465.7 32 480 46.33 480 64C480 81.67 465.7 96 448 96H80C71.16 96 64 103.2 64 112C64 120.8 71.16 128 80 128H448C483.3 128 512 156.7 512 192V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H448zM416 336C433.7 336 448 321.7 448 304C448 286.3 433.7 272 416 272C398.3 272 384 286.3 384 304C384 321.7 398.3 336 416 336z" />
-            </svg>
-            <p>My Credits</p>
+          <div
+            onClick={handleMyCredits}
+            class="w-full h-14 px-4 flex justify-between items-center  border"
+          >
+            <div class="flex justify-start items-center gap-7 cursor-pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4"
+                viewBox="0 0 512 512"
+              >
+                <path d="M448 32C465.7 32 480 46.33 480 64C480 81.67 465.7 96 448 96H80C71.16 96 64 103.2 64 112C64 120.8 71.16 128 80 128H448C483.3 128 512 156.7 512 192V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H448zM416 336C433.7 336 448 321.7 448 304C448 286.3 433.7 272 416 272C398.3 272 384 286.3 384 304C384 321.7 398.3 336 416 336z" />
+              </svg>
+              <p>My Credits</p>
+            </div>
+            <div class="text-[#d6a13d]">₹ 0</div>
           </div>
-          <div class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border">
+          <div
+            onClick={handleInviteAFriend}
+            class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border"
+          >
             <img
               src="https://webasset.fraazo.com/production/invitefriends.064279a738aa1138fe0c.png"
               class="h-4"
@@ -56,7 +119,10 @@ const Account = () => {
             />
             <p>Invite A Friend</p>
           </div>
-          <div class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border">
+          <div
+            onClick={handleHelpAndSupport}
+            class="w-full h-14 px-4 flex justify-start items-center gap-7 cursor-pointer border"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4"
@@ -66,23 +132,53 @@ const Account = () => {
             </svg>
             <p>Help & Support</p>
           </div>
-          <div class="w-full h-14 px-4 text-[#D01414] flex justify-start items-center gap-7 cursor-pointer border">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 fill-[#D01414]"
-              viewBox="0 0 512 512"
-            >
-              <path d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z" />
-            </svg>
-            <p>Logout</p>
+          <div
+            onClick={() => handleLogout()}
+            class="w-full h-14 px-4 text-[#D01414] flex justify-start items-center gap-7 cursor-pointer border"
+          >
+            {!loader ? (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 fill-[#D01414]"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z" />
+                </svg>
+                <p>Logout</p>
+              </>
+            ) : (
+              <svg
+                aria-hidden="true"
+                class="mr-2 w-8 h-8 text-gray-200 animate-spin bg-[white] fill-red-700"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+            )}
           </div>
         </div>
       </div>
       {/* right div */}
       <div class="w-4/6 py-8 font-Quicksand ">
-        <HelpAndSupport />
-        {/* <InviteAFriend /> */}
-        {/* <EditUser /> */}
+        {componentsState.myorders ? (
+          <MyOrders />
+        ) : componentsState.mycredits ? (
+          <MyCredits />
+        ) : componentsState.inviteafriends ? (
+          <InviteAFriend />
+        ) : componentsState.helpandsupport ? (
+          <HelpAndSupport />
+        ) : null}
       </div>
     </div>
   );

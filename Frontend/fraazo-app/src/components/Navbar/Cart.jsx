@@ -6,7 +6,7 @@ const Cart = ({ setCartComponent }) => {
   console.log(cartData);
   return (
     <div class="w-full fixed top-0 right-0 bottom-0 flex flex-row-reverse z-40 font-Quicksand ">
-      <div class=" w-[30%] bg-white border flex flex-col py-6 text-[20px] font-semibold ">
+      <div class=" w-[33%] bg-white border flex flex-col py-6 text-[20px] font-semibold ">
         <div class="w-full h-10 px-5 flex justify-between">
           <p>My Cart (0 items)</p>
           <svg
@@ -38,7 +38,7 @@ const Cart = ({ setCartComponent }) => {
           </div>
         ) : null}
       </div>
-      <div onClick={() => setCartComponent(false)} class="w-[70%]"></div>
+      <div onClick={() => setCartComponent(false)} class="w-[67%]"></div>
     </div>
   );
 };

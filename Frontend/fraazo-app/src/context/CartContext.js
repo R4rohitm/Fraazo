@@ -10,6 +10,7 @@ const CartProvider = ({ children }) => {
     try {
       let response = await fetch(`http://localhost:8080/cart/user/${userId}`);
       let data = await response.json();
+      console.log(data);
       setCartData(data);
     } catch (e) {
       console.log(e);

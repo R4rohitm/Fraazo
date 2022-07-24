@@ -51,9 +51,12 @@ const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
       });
 
       let data = await response.json();
-      console.log(data);
+      // console.log(data.user);
 
-      if (data.msg === "Verified") {
+      if (data?.user) {
+        localStorage.setItem("userId", data.user);
+        setAlreadyExists(ae);
+      } else {
         setAlreadyExists(ae);
       }
       setLoginComponent({

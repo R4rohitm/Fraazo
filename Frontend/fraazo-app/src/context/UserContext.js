@@ -10,6 +10,19 @@ const UserProvider = ({ children }) => {
     no: false,
   });
   //
+
+  const getUser = async (userId) => {
+    console.log(userId);
+    try {
+      let response = await fetch(`http://localhost:8080/users/${userId}`);
+      let data = await response.json();
+      console.log(data);
+      setUserData(data);
+    } catch (err) {
+      console.log("e");
+    }
+  };
+
   const createUser = async (formData) => {
     try {
       let response = await fetch(`http://localhost:8080/users/`, {
@@ -20,16 +33,6 @@ const UserProvider = ({ children }) => {
       let data = await response.json();
       console.log(data);
       localStorage.setItem("userId", JSON.stringify(data._id));
-      setUserData(JSON.parse(data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getUser = async (userId) => {
-    try {
-      let response = await fetch(`http://localhost:8080/users/${userId}`);
-      let data = await response.json();
       setUserData(JSON.parse(data));
     } catch (err) {
       console.log(err);
@@ -56,6 +59,7 @@ const UserProvider = ({ children }) => {
     getUser,
     updateUser,
     alreadyExists,
+    userData,
     setAlreadyExists,
   };
 
