@@ -9,6 +9,8 @@ import WelcomeUser from "../User/WelcomeUser";
 import RegisterUser from "../User/RegisterUser";
 import { UserContext } from "../../context/UserContext";
 
+const userId = localStorage.getItem("userId");
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("Home");
@@ -22,8 +24,16 @@ const Navbar = () => {
     welcome: false,
   });
   const inputRef = useRef(null);
-  const { alreadyExists, setAlreadyExists } = useContext(UserContext);
+  const { userData, alreadyExists, setAlreadyExists, getUser } =
+    useContext(UserContext);
 
+  useEffect(() => {
+    if (userId) {
+      getUser(userId);
+    }
+  }, [loginComponent]);
+
+  console.log(userData);
   const onButtonClick = () => {
     inputRef.current.value = "";
   };
@@ -53,7 +63,7 @@ const Navbar = () => {
       if (searchQuery) {
         try {
           let response = await fetch(
-            `http://localhost:8080/items/search?q=${searchQuery}`
+            `https://fraazonem201.herokuapp.com/items/search?q=${searchQuery}`
           );
           let data = await response.json();
           console.log(data);
@@ -150,10 +160,7 @@ const Navbar = () => {
             </button>
           </li>
           <li class="group">
-            <button
-              onClick={() => handleWelcomeComponent()}
-              class="flex gap-1 text-sm items-center group-hover:text-[#000000]"
-            >
+            <button class="flex gap-1 text-sm items-center group-hover:text-[#000000]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="w-4 h-4 fill-[#999999] group-hover:fill-black"
@@ -161,7 +168,11 @@ const Navbar = () => {
               >
                 <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" />
               </svg>
-              <p>Login</p>
+              {userData ? (
+                <Link to="account">{userData?.firstname}</Link>
+              ) : (
+                <p onClick={() => handleWelcomeComponent()}>Login</p>
+              )}
             </button>
           </li>
         </ul>
@@ -177,7 +188,7 @@ const Navbar = () => {
       <ul class="w-full h-[42px] text-[#999999] text-[14px] font-Quicksand border container px-11 flex flex-wrap justify-center gap-14 items-center mx-auto ">
         <div class="group">
           <div class="flex justify-center items-center gap-3">
-            <Link class="group-hover:text-[#4FBB90]" to="fruits">
+            <Link to="/product" class="group-hover:text-[#4FBB90]">
               Fruits
             </Link>
             <svg
@@ -190,22 +201,22 @@ const Navbar = () => {
           </div>
           <div class="hidden absolute bg-white top-28 pt-8 -ml-5 w-36 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="fruits/exotic_fruits">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Exotic Fruits
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="fruits/fresh_fruits">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Fresh Fruits
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="fruits/fruit_combos">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Fruit Combos
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="fruits/mangoes">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Mangoes
               </Link>
             </li>
@@ -213,7 +224,7 @@ const Navbar = () => {
         </div>
         <div class="group">
           <div class="flex justify-center items-center gap-3">
-            <Link class="group-hover:text-[#4FBB90]" to="vegetables">
+            <Link to="/product" class="group-hover:text-[#4FBB90]">
               Vegetables
             </Link>
             <svg
@@ -226,36 +237,27 @@ const Navbar = () => {
           </div>
           <div class="hidden absolute bg-white top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="vegetables/daily_veggies">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Daily Veggies
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link class="hover:text-[#4FBB90]" to="vegetables/herbs_leafies">
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Herbs & Leafies
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link
-                class="hover:text-[#4FBB90]"
-                to="vegetables/exotic_vegetables"
-              >
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Exotic Vegetables
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link
-                class="hover:text-[#4FBB90]"
-                to="vegetables/cuts_peeled_sprouts"
-              >
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Cuts,Peeled & Sprouts
               </Link>
             </li>
             <li class="h-10 w-full flex justify-start items-start">
-              <Link
-                class="hover:text-[#4FBB90]"
-                to="vegetables/vegetable_combos"
-              >
+              <Link class="hover:text-[#4FBB90]" to="product">
                 Vegetable Combos
               </Link>
             </li>

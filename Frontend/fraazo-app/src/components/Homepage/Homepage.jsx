@@ -12,7 +12,6 @@ function Homepage() {
       <BestDeals />
       <Fruits />
       <Vegetables />
-      <Footer />
     </div>
   );
 }

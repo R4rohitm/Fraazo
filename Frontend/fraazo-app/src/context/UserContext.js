@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
 
+const userId = localStorage.getItem("userId");
+
 const UserContext = createContext();
-const userId = JSON.parse(localStorage.getItem("userId"));
 
 const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState();
@@ -10,9 +11,24 @@ const UserProvider = ({ children }) => {
     no: false,
   });
   //
+
+  const getUser = async (userId) => {
+    console.log(userId);
+    try {
+      let response = await fetch(
+        `https://fraazonem201.herokuapp.com/users/${userId}`
+      );
+      let data = await response.json();
+      console.log(data);
+      setUserData(data);
+    } catch (err) {
+      console.log("e");
+    }
+  };
+
   const createUser = async (formData) => {
     try {
-      let response = await fetch(`http://localhost:8080/users/`, {
+      let response = await fetch(`https://fraazonem201.herokuapp.com/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -26,23 +42,16 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  const getUser = async (userId) => {
-    try {
-      let response = await fetch(`http://localhost:8080/users/${userId}`);
-      let data = await response.json();
-      setUserData(JSON.parse(data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const updateUser = async (formData) => {
     try {
-      let response = await fetch(`http://localhost:8080/users/${userId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      let response = await fetch(
+        `https://fraazonem201.herokuapp.com/users/${userId}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       let data = await response.json();
       console.log(data);
@@ -52,9 +61,9 @@ const UserProvider = ({ children }) => {
   };
 
   const value = {
+    userData,
     createUser,
     getUser,
-    updateUser,
     alreadyExists,
     setAlreadyExists,
   };
