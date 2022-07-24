@@ -10,7 +10,7 @@ function Fruits() {
   const [todos, setTodos] = useState([]);
   useEffect((props) => {
     const getData = async () => {
-      let res = await fetch("http://localhost:8080/items/fruits");
+      let res = await fetch("https://fraazonem201.herokuapp.com/items/fruits");
       let data = await res.json();
       setTodos(data);
     };

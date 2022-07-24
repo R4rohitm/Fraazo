@@ -1,14 +1,52 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
+const userId = localStorage.getItem("userId");
 const Cart = ({ setCartComponent }) => {
-  const { cartData } = useContext(CartContext);
-  console.log(cartData);
+  // const { cartData, cartItems } = useContext(CartContext);
+  // console.log(cartData);
+  const [cartData, setCartData] = useState();
+  const [cartCount, setCartCount] = useState(0);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCount = async () => {
+      try {
+        let response = await fetch(
+          `https://fraazonem201.herokuapp.com/cart/countItems/${userId}`
+        );
+        let data = await response.json();
+        console.log(data);
+        setCartCount(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    const getCart = async () => {
+      try {
+        let response = await fetch(
+          `https://fraazonem201.herokuapp.com/cart/user/${userId}`
+        );
+        let data = await response.json();
+        console.log(data);
+        setCartData(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getCount();
+    getCart();
+  }, []);
   return (
-    <div class="w-full fixed top-0 right-0 bottom-0 flex flex-row-reverse z-40 font-Quicksand ">
-      <div class=" w-[33%] bg-white border flex flex-col py-6 text-[20px] font-semibold ">
+    <div class="w-full fixed top-0 right-0 bottom-0 flex flex-row-reverse z-40 font-Quicksand">
+      <div class=" w-[33%] h-full bg-white border flex flex-col py-6 text-[20px] font-semibold ">
         <div class="w-full h-10 px-5 flex justify-between">
-          <p>My Cart (0 items)</p>
+          <p>
+            My Cart{"("} {cartCount} {")"}Items
+          </p>
           <svg
             onClick={() => setCartComponent(false)}
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +74,41 @@ const Cart = ({ setCartComponent }) => {
               Let's Shop!
             </div>
           </div>
-        ) : null}
+        ) : (
+          <div class="px-6 overflow-y-auto">
+            {cartData.map((e) => {
+              return (
+                <div
+                  class="w-full h-[150px] flex justify-start items-center gap-7 py-3 font-Quicksand font-semibold"
+                  key={e._id}
+                >
+                  <img
+                    class="h-[100px] border z-30 bg-white rounded-md"
+                    src={e.image}
+                    alt="img"
+                  />
+                  <div class="h-full flex flex-col py-5 items-start justify-between text-[14px]">
+                    <p>{e.name}</p>
+                    <p>{e.qty}</p>
+                    <p>₹{e.price}</p>
+                  </div>
+                  <div></div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <div class="w-full h-7 flex flex-row-reverse items-center px-4">
+          <div
+            onClick={() => {
+              setCartComponent(false);
+              navigate("/checkout");
+            }}
+            class="w-[180px] cursor-pointer h-[40px] px-8 text-white flex justify-center items-center bg-[#4FBB90] rounded-xl"
+          >
+            Checkout
+          </div>
+        </div>
       </div>
       <div onClick={() => setCartComponent(false)} class="w-[67%]"></div>
     </div>

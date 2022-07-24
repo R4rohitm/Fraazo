@@ -2,8 +2,6 @@ import "./App.css";
 import { Footer } from "./components/Footer/Footer";
 import BannerCarousel from "./components/Homepage/Banner_slider/BannerCarousel";
 import MainRoutes from "./routes/Mainroutes";
-
-import Homepage from "./components/Homepage/Homepage";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
 
@@ -15,7 +13,6 @@ function App() {
       <UserProvider>
         <CartProvider>
           <MainRoutes />
-          <Homepage />
         </CartProvider>
       </UserProvider>
     </>
