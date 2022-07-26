@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Menu from "../components/Product/Menu";
-import RegisterUser from "../components/User/RegisterUser";
 import Account from "../components/Account/Account";
 import OrderSuccess from "../components/Payment/OrderSuccess";
 import Checkout from "../components/AfterCart/Checkout";

@@ -44,17 +44,20 @@ const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
     console.log(otp, email);
     setLoader(true);
     try {
-      let response = await fetch(`http://localhost:8080/auth/verifyOTP`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          otp,
-          email: email.email,
-        }),
-      });
+      let response = await fetch(
+        `https://fraazonem201.herokuapp.com/auth/verifyOTP`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            otp,
+            email: email.email,
+          }),
+        }
+      );
 
       let data = await response.json();
-      // console.log(data.user);
+      console.log(data.user);
 
       if (data?.user) {
         localStorage.setItem("userId", data.user);
@@ -62,6 +65,7 @@ const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
       } else {
         setAlreadyExists(ae);
       }
+
       setLoginComponent({
         login: false,
         welcome: false,

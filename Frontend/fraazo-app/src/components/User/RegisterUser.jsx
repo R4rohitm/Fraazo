@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
-const RegisterUser = () => {
+const RegisterUser = ({ setAlreadyExists }) => {
   const [formData, setFormData] = useState();
 
-  const { createUser, setAlreadyExists } = useContext(UserContext);
+  const { createUser } = useContext(UserContext);
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;

@@ -10,6 +10,7 @@ const UserProvider = ({ children }) => {
     yes: false,
     no: false,
   });
+
   //
 
   const getUser = async (userId) => {
@@ -19,7 +20,7 @@ const UserProvider = ({ children }) => {
         `https://fraazonem201.herokuapp.com/users/${userId}`
       );
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
       setUserData(data);
     } catch (err) {
       console.log("e");
@@ -34,7 +35,7 @@ const UserProvider = ({ children }) => {
         body: JSON.stringify(formData),
       });
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
       localStorage.setItem("userId", JSON.stringify(data._id));
       setUserData(JSON.parse(data));
     } catch (err) {
@@ -52,9 +53,9 @@ const UserProvider = ({ children }) => {
           body: JSON.stringify(formData),
         }
       );
-
+      // eslint-disable-next-line
       let data = await response.json();
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -62,6 +63,7 @@ const UserProvider = ({ children }) => {
 
   const value = {
     userData,
+    updateUser,
     createUser,
     getUser,
     alreadyExists,
