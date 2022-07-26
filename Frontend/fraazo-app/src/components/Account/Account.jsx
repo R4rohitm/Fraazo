@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HelpAndSupport from "./HelpAndSupport";
 import InviteAFriend from "./InviteAFriend";
-import EditUser from "./EditUser";
+// import EditUser from "./EditUser";
 import MyCredits from "./MyCredits";
 import MyOrders from "./MyOrders";
 
@@ -13,6 +14,8 @@ const Account = () => {
     inviteafriends: false,
     helpandsupport: false,
   });
+
+  const navigate = useNavigate();
 
   const handleMyOrder = () => {
     setComponentsState({
@@ -50,10 +53,9 @@ const Account = () => {
 
   const handleLogout = () => {
     setLoader(true);
-    setTimeout(() => {
-      localStorage.removeItem("userId");
-      setLoader(false);
-    }, 2000);
+    localStorage.removeItem("userId");
+    navigate("/");
+    setLoader(false);
   };
   return (
     <div class="border h-[550px] w-full flex gap-7 bg-[#FBFBFB] ">

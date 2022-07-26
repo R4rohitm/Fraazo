@@ -28,12 +28,29 @@ const Navbar = () => {
     useContext(UserContext);
 
   useEffect(() => {
+    const searchProducts = async () => {
+      if (searchQuery) {
+        try {
+          let response = await fetch(
+            `https://fraazonem201.herokuapp.com/items/search?q=${searchQuery}`
+          );
+          let data = await response.json();
+          console.log(data);
+          setSearchData(data);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    };
+
     if (userId) {
       getUser(userId);
     }
-  }, [loginComponent]);
 
-  console.log(userData);
+    searchProducts();
+    // eslint-disable-next-line
+  }, [searchQuery]);
+
   const onButtonClick = () => {
     inputRef.current.value = "";
   };
@@ -57,25 +74,6 @@ const Navbar = () => {
       welcome: false,
     });
   };
-
-  useEffect(() => {
-    const searchProducts = async () => {
-      if (searchQuery) {
-        try {
-          let response = await fetch(
-            `https://fraazonem201.herokuapp.com/items/search?q=${searchQuery}`
-          );
-          let data = await response.json();
-          console.log(data);
-          setSearchData(data);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    };
-
-    searchProducts();
-  }, [searchQuery]);
 
   const onChangedDebounce = useDebouncedCallback(
     (e) => setSearchQuery(e.target.value),
@@ -199,7 +197,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute bg-white top-28 pt-8 -ml-5 w-36 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-32 pt-8 -ml-5 w-36 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="product">
                 Exotic Fruits
@@ -235,7 +233,7 @@ const Navbar = () => {
               <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z" />
             </svg>
           </div>
-          <div class="hidden absolute bg-white top-28 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
+          <div class="hidden absolute bg-white top-32 pt-8 -ml-10 w-52 flex-col shadow-sm pl-3 z-40 text-black hover:inline-block  group-hover:inline-block ">
             <li class="h-10 w-full flex justify-start items-start">
               <Link class="hover:text-[#4FBB90]" to="product">
                 Daily Veggies
@@ -298,7 +296,7 @@ const Navbar = () => {
         </div>
       ) : alreadyExists.no ? (
         <div class="fixed top-[50%] shadow-2xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
-          <RegisterUser />
+          <RegisterUser setAlreadyExists={setAlreadyExists} />
         </div>
       ) : null}
     </nav>

@@ -1,18 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./carasol.module.css";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Slider from "react-slick";
-
+import { CartContext } from "../../../context/CartContext";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const userId = localStorage.getItem("userId");
+
 function Fruits() {
   const [todos, setTodos] = useState([]);
+  const { createCart } = useContext(CartContext);
   useEffect((props) => {
     const getData = async () => {
       let res = await fetch("https://fraazonem201.herokuapp.com/items/fruits");
       let data = await res.json();
-      setTodos(data);
+      if (userId) {
+        setTodos(
+          data.map((e) => {
+            return { ...e, userId };
+          })
+        );
+      } else {
+        setTodos(data);
+      }
     };
     getData();
   }, []);
@@ -52,8 +63,10 @@ function Fruits() {
                 </div>
                 <div style={{ fontWeight: "500" }}>₹ {data.price}</div>
               </div>
-              <div className={styles.product_each_items_priceButton1}>
-                {/* <button ><span className={styles.addToCartIcon}><AiOutlineShoppingCart/></span>ADD</button> */}
+              <div
+                onClick={() => createCart(data)}
+                className={styles.product_each_items_priceButton1}
+              >
                 <div>
                   <AiOutlineShoppingCart />
                 </div>

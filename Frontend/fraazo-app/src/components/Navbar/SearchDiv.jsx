@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
+const userId = localStorage.getItem("userId");
 
 const SearchDiv = ({ searchData }) => {
+  if (userId) {
+    searchData.map((e) => {
+      return { ...e, userId };
+    });
+  }
+
   console.log(searchData);
+
+  const { createCart } = useContext(CartContext);
 
   return (
     <div>
@@ -26,7 +37,10 @@ const SearchDiv = ({ searchData }) => {
                 <p>{e.qty}</p>
               </div>
               <div class="w-1/5">
-                <div class="group w-20 h-[32px] cursor-pointer rounded-3xl flex justify-center items-center gap-1 text-[13px] text-[#4FBB90] border border-[#4FBB90] hover:bg-[#4FBB90] hover:text-white">
+                <div
+                  onClick={() => createCart(e)}
+                  class="group w-20 h-[32px] cursor-pointer rounded-3xl flex justify-center items-center gap-1 text-[13px] text-[#4FBB90] border border-[#4FBB90] hover:bg-[#4FBB90] hover:text-white"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-3 fill-[#4FBB90] group-hover:fill-white"
