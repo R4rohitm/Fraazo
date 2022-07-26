@@ -1,30 +1,28 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./carasol.module.css";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import Slider from "react-slick";
-import { CartContext } from "../../../context/CartContext";
-
+import ProductDiv from "./ProductDiv";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const userId = localStorage.getItem("userId");
+
 function Vegetables() {
   const [todos, setTodos] = useState([]);
-  const { createCart } = useContext(CartContext);
-  useEffect((props) => {
+  useEffect(() => {
     const getData = async () => {
-      let res = await fetch(
-        "https://fraazonem201.herokuapp.com/items/vegetables"
-      );
-      let data = await res.json();
-      if (userId) {
+      try {
+        let res = await fetch(
+          "https://fraazonem201.herokuapp.com/items/vegetables"
+        );
+        let data = await res.json();
         setTodos(
           data.map((e) => {
-            return { ...e, userId };
+            return { ...e, userId, quantity: 1 };
           })
         );
-      } else {
-        setTodos(data);
+      } catch (e) {
+        console.log(e);
       }
     };
     getData();
@@ -46,37 +44,7 @@ function Vegetables() {
       >
         {todos.map((data) => (
           <div key={data._id} className={styles.product_each_items}>
-            <img
-              style={{ width: "100", backgroundColor: "#f9f9f9" }}
-              src={data.image}
-              alt="product_image"
-            />
-            <div>{data.name}</div>
-            <div className={styles.product_each_items_priceButton}>
-              <div>
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: "lightslategray",
-                    marginTop: "5px",
-                  }}
-                >
-                  {data.qty}
-                </div>
-                <div style={{ fontWeight: "500" }}>₹ {data.price}</div>
-              </div>
-              <div
-                onClick={() => createCart(data)}
-                className={styles.product_each_items_priceButton1}
-              >
-                <div>
-                  <AiOutlineShoppingCart />
-                </div>
-                <div>
-                  <button>ADD</button>
-                </div>
-              </div>
-            </div>
+            <ProductDiv data={data} />
           </div>
         ))}
       </Slider>

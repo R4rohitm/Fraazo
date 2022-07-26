@@ -35,7 +35,13 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  const value = { cartItems, createCart, cartData, cartTotal, setCartTotal };
+  const value = {
+    cartItems,
+    createCart,
+    cartData,
+    cartTotal,
+    setCartTotal,
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

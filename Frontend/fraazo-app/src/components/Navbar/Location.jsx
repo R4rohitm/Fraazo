@@ -61,7 +61,7 @@ const Location = (props) => {
       </div>
       <div
         onClick={() => setGeocomponent(false)}
-        class="w-[70%] bg-transparent"
+        class="w-[70%] bg-black bg-opacity-40"
       ></div>
     </div>
   );
