@@ -53,10 +53,10 @@ const Button = ({ id, q, loading, setLoading }) => {
 
   useEffect(() => {}, [quantity]);
   return (
-    <div class="w-full h-[25%] flex justify-between items-center gap-3">
+    <div class="w-full h-[30%] flex justify-end items-center gap-3">
       <div
         onClick={() => decQuantity({ op: "dec" })}
-        class="border border-[#4FBB90] text-[#4FBB90] flex justify-center items-center w-8 h-full rounded-l-full hover:bg-[#4FBB90] hover:text-white"
+        class="border border-[#4FBB90] cursor-pointer text-[#4FBB90] flex justify-center items-center w-7 h-full rounded-l-full hover:bg-[#4FBB90] hover:text-white"
       >
         -
       </div>
@@ -84,7 +84,7 @@ const Button = ({ id, q, loading, setLoading }) => {
       )}
       <button
         onClick={() => incQuantity({ op: "inc" })}
-        class="border border-[#4FBB90] text-[#4FBB90] flex justify-center items-center w-8 h-full rounded-r-full hover:bg-[#4FBB90] hover:text-white"
+        class="border border-[#4FBB90] cursor-pointer text-[#4FBB90] flex justify-center items-center w-7 h-full rounded-r-full hover:bg-[#4FBB90] hover:text-white"
       >
         +
       </button>

@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 const userId = localStorage.getItem("userId");
-const Cart = ({ setCartComponent }) => {
+const Cart = ({ cartCount, setCartCount, setCartComponent }) => {
   const [cartData, setCartData] = useState();
-  const [cartCount, setCartCount] = useState(0);
+  // const [cartCount, setCartCount] = useState(0);
   const [loader, setLoader] = useState(true);
   const [loading, setLoading] = useState(false);
   const price = useRef(0);
@@ -29,19 +29,6 @@ const Cart = ({ setCartComponent }) => {
 
   useEffect(() => {
     setLoader(true);
-    const getCount = async () => {
-      try {
-        let response = await fetch(
-          `https://fraazonem201.herokuapp.com/cart/countItems/${userId}`
-        );
-        let data = await response.json();
-        console.log(data);
-        setCartCount(data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
     const getCart = async () => {
       try {
         let response = await fetch(
@@ -53,14 +40,14 @@ const Cart = ({ setCartComponent }) => {
           return acc + parseInt(el.price) * parseInt(el.quantity);
         }, 0);
         setCartData(data);
+        setCartCount(data.length);
       } catch (e) {
         console.log(e);
       }
       setLoader(false);
     };
-
-    getCount();
     getCart();
+    // eslint-disable-next-line
   }, [loading]);
 
   return (
@@ -118,17 +105,17 @@ const Cart = ({ setCartComponent }) => {
             </div>
           </div>
         ) : (
-          <div class="px-6 h-screen flex flex-col justify-between ">
-            <div class="h-[85%] overflow-y-scroll no-scrollbar">
+          <div class="px-6 h-[90vh] flex flex-col justify-between gap-1">
+            <div class="h-[90%] overflow-y-scroll no-scrollbar">
               {cartData.map((e) => {
                 return (
                   <div
-                    class="w-full border-b h-[120px] flex justify-between gap-4 items-start  px-4 py-2 font-Quicksand font-semibold"
+                    class="w-full border-b h-[115px]  flex justify-between gap-4 items-start  px-4 py-2 font-Quicksand font-semibold"
                     key={e._id}
                   >
                     <div class="h-full w-[70%] flex justify-start items-start gap-7">
                       <img
-                        class="h-[100px] border my-auto z-30 bg-white rounded-md"
+                        class="h-[90px] border my-auto z-30 bg-white rounded-md"
                         src={e.image}
                         alt="img"
                       />
@@ -138,10 +125,10 @@ const Cart = ({ setCartComponent }) => {
                         <p class="text-md font-medium">₹{e.price}</p>
                       </div>
                     </div>
-                    <div class="w-[22%] h-full flex flex-col justify-between items-end">
+                    <div class="w-[22%]  h-full flex flex-col justify-between items-end">
                       <div
                         onClick={() => deleteItem(e._id)}
-                        class="cursor-pointer py-4 text-[11px] font-light underline underline-offset-2"
+                        class="cursor-pointer py-1 text-[11px] font-light underline underline-offset-2 hover:text-red-600"
                       >
                         Remove
                       </div>
@@ -157,7 +144,7 @@ const Cart = ({ setCartComponent }) => {
               })}
             </div>
             <div>
-              <div class="w-full h-16 border-t-2 flex justify-between items-center px-2 tracking-wider">
+              <div class="w-full h-[10%]border py-2 border-t-2 flex justify-between items-center px-2 tracking-wider">
                 <div class="text-sm">
                   <p>{cartData.length} Items</p>
                   <p class="text-[#FE6D0F] flex items-center ">
@@ -185,7 +172,10 @@ const Cart = ({ setCartComponent }) => {
           </div>
         )}
       </div>
-      <div onClick={() => setCartComponent(false)} class="w-[65%]"></div>
+      <div
+        onClick={() => setCartComponent(false)}
+        class="w-[65%] bg-black bg-opacity-40"
+      ></div>
     </div>
   );
 };
