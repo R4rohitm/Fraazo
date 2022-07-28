@@ -1,6 +1,4 @@
 import "./App.css";
-import { Footer } from "./components/Footer/Footer";
-import BannerCarousel from "./components/Homepage/Banner_slider/BannerCarousel";
 import MainRoutes from "./routes/Mainroutes";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
