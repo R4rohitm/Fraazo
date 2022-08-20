@@ -77,10 +77,10 @@ const Button = ({ id, q, loading, setLoading }) => {
             fill="currentFill"
           />
         </svg>
-      ) : q ? (
-        <p class="text-sm font-light">{q}</p>
-      ) : (
+      ) : quantity ? (
         <p class="text-sm font-light">{quantity}</p>
+      ) : (
+        <p class="text-sm font-light">{q}</p>
       )}
       <button
         onClick={() => incQuantity({ op: "inc" })}

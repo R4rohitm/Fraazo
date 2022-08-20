@@ -3,7 +3,7 @@ import MainRoutes from "./routes/Mainroutes";
 import { CartProvider } from "./context/CartContext";
 import { UserProvider } from "./context/UserContext";
 
-// import MainRoutes from "./routes/Mainroutes.jsx";
+
 
 function App() {
   return (
