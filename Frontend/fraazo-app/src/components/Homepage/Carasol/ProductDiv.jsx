@@ -2,9 +2,16 @@ import React, { useContext, useState } from "react";
 import styles from "./carasol.module.css";
 import { CartContext } from "../../../context/CartContext";
 
+const userId = localStorage.getItem("userId");
 const ProductDiv = ({ data }) => {
   const [addedToCart, setAddedToCart] = useState(false);
   const { createCart } = useContext(CartContext);
+
+  const checkLogin = () => {
+    if (!userId) {
+      return alert("Please Login");
+    }
+  };
   return (
     <>
       <img
@@ -43,6 +50,7 @@ const ProductDiv = ({ data }) => {
         ) : (
           <div
             onClick={() => {
+              checkLogin();
               createCart(data);
               setAddedToCart(true);
             }}

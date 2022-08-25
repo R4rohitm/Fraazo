@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import HelpAndSupport from "./HelpAndSupport";
 import InviteAFriend from "./InviteAFriend";
 // import EditUser from "./EditUser";
 import MyCredits from "./MyCredits";
 import MyOrders from "./MyOrders";
+import { UserContext } from "../../context/UserContext";
 
 const Account = () => {
   const [loader, setLoader] = useState(false);
@@ -15,6 +16,7 @@ const Account = () => {
     helpandsupport: false,
   });
 
+  const { userId, setUserId } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleMyOrder = () => {
@@ -54,8 +56,11 @@ const Account = () => {
   const handleLogout = () => {
     setLoader(true);
     localStorage.removeItem("userId");
-    navigate("/");
-    setLoader(false);
+    setUserId(localStorage.getItem("userId") || null);
+    setTimeout(() => {
+      setLoader(false);
+      navigate("/");
+    }, 2000);
   };
   return (
     <div class="border h-[550px] w-full flex gap-7 bg-[#FBFBFB] ">

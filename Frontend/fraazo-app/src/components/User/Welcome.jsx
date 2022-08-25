@@ -3,7 +3,7 @@ import EnterEmail from "./Welcome/EnterEmail";
 import EnterOTP from "./Welcome/EnterOTP";
 import { UserContext } from "../../context/UserContext";
 
-const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
+const Welcome = ({ setUserId, setLoginComponent, handleLoginComponent }) => {
   const [otpComponent, setOtpComponent] = useState(false);
   const [email, setEmail] = useState({});
   const [loader, setLoader] = useState(false);
@@ -61,6 +61,7 @@ const Welcome = ({ setLoginComponent, handleLoginComponent }) => {
 
       if (data?.user) {
         localStorage.setItem("userId", data.user);
+        setUserId(localStorage.getItem("userId"));
         setAlreadyExists(ae);
       } else {
         setAlreadyExists(ae);

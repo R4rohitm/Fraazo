@@ -1,11 +1,12 @@
 import React, { createContext, useState } from "react";
 
-const userId = localStorage.getItem("userId");
+const userIdTop = localStorage.getItem("userId");
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState();
+  const [userId, setUserId] = useState(userIdTop || null);
   const [alreadyExists, setAlreadyExists] = useState({
     yes: false,
     no: false,
@@ -68,6 +69,8 @@ const UserProvider = ({ children }) => {
     getUser,
     alreadyExists,
     setAlreadyExists,
+    userId,
+    setUserId,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
