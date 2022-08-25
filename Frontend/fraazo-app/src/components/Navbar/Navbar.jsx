@@ -9,8 +9,6 @@ import WelcomeUser from "../User/WelcomeUser";
 import RegisterUser from "../User/RegisterUser";
 import { UserContext } from "../../context/UserContext";
 
-const userId = localStorage.getItem("userId");
-
 const Navbar = () => {
   const [refreshNavbar, setRefreshNavbar] = useState(false);
   const [location, setLocation] = useState("Home");
@@ -26,8 +24,14 @@ const Navbar = () => {
   });
   const inputRef = useRef(null);
   const navigate = useNavigate();
-  const { userData, alreadyExists, setAlreadyExists, getUser } =
-    useContext(UserContext);
+  const {
+    userData,
+    alreadyExists,
+    setAlreadyExists,
+    getUser,
+    userId,
+    setUserId,
+  } = useContext(UserContext);
 
   useEffect(() => {
     const searchProducts = async () => {
@@ -69,7 +73,7 @@ const Navbar = () => {
     getCount();
     searchProducts();
     // eslint-disable-next-line
-  }, [refreshNavbar, searchQuery]);
+  }, [userId, searchQuery]);
 
   const onButtonClick = () => {
     inputRef.current.value = "";
@@ -321,6 +325,7 @@ const Navbar = () => {
         ) : null}
         {cartComponent ? (
           <Cart
+            userId={userId}
             cartCount={cartCount}
             setCartCount={setCartCount}
             setCartComponent={setCartComponent}
@@ -335,6 +340,7 @@ const Navbar = () => {
             ></div>
             <div class="fixed top-[50%] shadow-xl left-[50%] z-40 bg-white rounded-xl  w-[440px] h-[360px] -mt-[180px] -ml-[220px] px-11 py-4 font-Quicksand">
               <Welcome
+                setUserId={setUserId}
                 setLoginComponent={setLoginComponent}
                 handleLoginComponent={handleLoginComponent}
               />
