@@ -29,14 +29,17 @@ const UserProvider = ({ children }) => {
   };
 
   const createUser = async (formData) => {
+    console.log(formData);
     try {
       let response = await fetch(`https://fraazonem201.herokuapp.com/users/`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
       let data = await response.json();
-      // console.log(data);
+      console.log(data);
       localStorage.setItem("userId", JSON.stringify(data._id));
       setUserData(JSON.parse(data));
     } catch (err) {

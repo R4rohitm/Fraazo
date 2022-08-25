@@ -51,7 +51,7 @@ const Cart = ({ userId, cartCount, setCartCount, setCartComponent }) => {
 
   return (
     <div class="w-full fixed top-0 right-0 bottom-0 flex flex-row-reverse z-40 font-Quicksand">
-      <div class=" w-[35%] h-full bg-white border flex flex-col py-6 text-[20px] font-semibold ">
+      <div class=" w-[80%] lg:w-[40%] md:w-[50%] sm:w-[70%] xl:w-[30%] h-full bg-white border flex flex-col py-6 text-[20px] font-semibold ">
         <div class="w-full h-10 px-5 flex justify-between">
           <p>
             My Cart {"("}
@@ -118,7 +118,7 @@ const Cart = ({ userId, cartCount, setCartCount, setCartComponent }) => {
               {cartData.map((e) => {
                 return (
                   <div
-                    class="w-full border-b h-[115px]  flex justify-between gap-4 items-start  px-4 py-2 font-Quicksand font-semibold"
+                    class="w-full border-b h-[115px]  flex flex-wrap justify-between gap-4 items-start  px-4 py-2 font-Quicksand font-semibold"
                     key={e._id}
                   >
                     <div class="h-full w-[70%] flex justify-start items-start gap-7">
@@ -182,7 +182,7 @@ const Cart = ({ userId, cartCount, setCartCount, setCartComponent }) => {
       </div>
       <div
         onClick={() => setCartComponent(false)}
-        class="w-[65%] bg-black bg-opacity-40"
+        class="w-[20%] xl:w-[70%] lg:w-[60%] md:w-[50%] sm:w-[30%] bg-black bg-opacity-40"
       ></div>
     </div>
   );

@@ -108,14 +108,14 @@ const Navbar = () => {
     <>
       <nav>
         <div>
-          <ul class="w-full h-[88px] text-[#999999] font-Quicksand border container px-11 flex flex-wrap justify-between items-center mx-auto ">
+          <ul class="w-full h-[88px] text-[#999999] font-Quicksand border container px-8 flex flex-wrap justify-between items-center mx-auto ">
             <li
               class="cursor-pointer hover:text-[#000000]"
               onClick={() => navigate("/")}
             >
               <img
                 src="https://webasset.fraazo.com/production/b70a67f4e825e3d388ac4466952c20a8.svg"
-                class=" h-12 sm:h-12"
+                class=" h-12 sm:h-8 lg:h-10"
                 alt="Logo"
               />
             </li>
@@ -134,23 +134,25 @@ const Navbar = () => {
                 <p>{location}</p>
               </button>
             </li>
-            <li class="border w-2/4 h-12 rounded-full px-7 flex items-center justify-between gap-2 hover:text-[#000000]">
-              <input
-                onChange={(e) => {
-                  onChangedDebounce(e);
-                }}
-                ref={inputRef}
-                type="text"
-                class="outline-none text-sm w-full h-full "
-                placeholder="Find fresh vegetables, fruits and dairy..."
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4 fill-[#999999] hover:fill-[#4FBB90] "
-                viewBox="0 0 512 512"
-              >
-                <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
-              </svg>
+            <li class="hidden lg:block lg:w-2/4 md:block md:w-2/5 ">
+              <div class="border h-12 rounded-full px-7 flex items-center justify-between gap-2 hover:text-[#000000] ">
+                <input
+                  onChange={(e) => {
+                    onChangedDebounce(e);
+                  }}
+                  ref={inputRef}
+                  type="text"
+                  class="outline-none text-sm w-full h-full "
+                  placeholder="Find fresh vegetables, fruits and dairy..."
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 h-4 fill-[#999999] hover:fill-[#4FBB90] "
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+                </svg>
+              </div>
             </li>
             <li class="group flex gap-1">
               <button
@@ -215,7 +217,7 @@ const Navbar = () => {
             </div>
           ) : null}
         </div>
-        <ul class="w-full h-[42px] text-[#999999] text-[14px] font-Quicksand border container px-11 flex flex-wrap justify-center gap-14 items-center mx-auto ">
+        <ul class="w-full h-[42px] text-[#999999] text-[14px] font-Quicksand border container px-8 flex flex-wrap justify-center gap-14 items-center mx-auto ">
           <div class="group">
             <div class="flex justify-center items-center gap-3">
               <Link to="/product" class="group-hover:text-[#4FBB90]">
@@ -357,7 +359,10 @@ const Navbar = () => {
           <>
             <div class="fixed top-0 left-0 z-40 bg-opacity-40 bg-black h-screen w-full"></div>
             <div class="fixed top-[50%] shadow-2xl left-[50%] z-40 bg-white rounded-xl  w-[660px] h-[530px] -mt-[250px] -ml-[330px] px-11 py-4 font-Quicksand">
-              <RegisterUser setAlreadyExists={setAlreadyExists} />
+              <RegisterUser
+                setUserId={setUserId}
+                setAlreadyExists={setAlreadyExists}
+              />
             </div>
           </>
         ) : null}
