@@ -27,6 +27,66 @@ function Vegetables() {
     };
     getData();
   }, []);
+
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        id={styles.nextArrow}
+        className={className}
+        style={{ ...style}}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        id={styles.prevArrow}
+        className={className}
+        style={{ ...style }}
+        onClick={onClick}
+      />
+    );
+  }
+  const settings = {
+    dots:false,
+    speed:1000,
+    slidesToShow:5,
+    slidesToScroll:5,
+    initialSlide: 0,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 426,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll:1,
+          centerMode: false,
+        },
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll:2,
+          centerMode: false,
+        },
+      },
+      {
+        breakpoint: 1025,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          centerMode: false,
+        },
+      },
+    ],
+  }
+
   return (
     <div className={styles.bestDeals_main}>
       <div className={styles.bestDeals_main2}>
@@ -35,13 +95,7 @@ function Vegetables() {
       </div>
 
       <hr className={styles.bestDeals_main3} />
-      <Slider
-        dots={false}
-        slidesToShow={5}
-        slidesToScroll={5}
-        autoPlay={true}
-        autoPlaySpeed={500}
-      >
+      <Slider {...settings}>
         {todos.map((data) => (
           <div key={data._id} className={styles.product_each_items}>
             <ProductDiv data={data} />

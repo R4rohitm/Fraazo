@@ -15,7 +15,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 export const Footer = () => {
   return (
     <>
-       <ChakraProvider>
+    <ChakraProvider>
     <Box id={styles.Container}>
         <Box id={styles.dowloadeappcontainer}>
           <img src={img5} alt="img" id={styles.img1} />
@@ -63,6 +63,7 @@ export const Footer = () => {
           <img src={image1} alt="img" id={styles.footer_img} />
         </div>
         <div id={styles.Footer_Card}> 
+          <div id={styles.Footer_responsive}>
             <div id={styles.footer_card_1}>
               <div id={styles.footer_card_2}>
                 <img src={img2} alt="img" id={styles.footer_card_3} />
@@ -70,9 +71,9 @@ export const Footer = () => {
                   Order online vegetables and fruits directly from the farm.
                   Fraazo is online platform that allows customer to get farm
                   fresh produce directly from farmers.
-                </div>
               </div>
-              <div id={styles.footer_Card_4}>
+            </div>
+            <div id={styles.footer_Card_4}>
                 <h3  id={styles.footer_card_5}>
                   Useful Links
                 </h3>
@@ -80,8 +81,8 @@ export const Footer = () => {
                 <div ><a id={styles.colorText} href="https://fraazo.freshdesk.com/support/solutions/61000082765" target="blank">FAQ</a></div>
                 <div ><a id={styles.colorText} href="https://fraazo.com/public/terms_and_conditions.html" target="blank">Terms and Conditions</a></div>
                 <div ><a id={styles.colorText} href="https://fraazo.com/public/terms_and_conditions.html" target="blank">Sitemap</a></div>
-              </div>
-              <div id={styles.footer_card_7}>
+            </div>
+            <div id={styles.footer_card_7}>
                 <h3  id={styles.footer_card_5}>
                   Cities We Serve
                 </h3>
@@ -92,8 +93,8 @@ export const Footer = () => {
                 <div id={styles.colorText}>Noida</div>
                 <div id={styles.colorText}>Gurugram</div>
                 <div id={styles.colorText}>Pune</div>
-              </div>
-              <div id={styles.footer_card_8}>
+            </div>
+            <div id={styles.footer_card_8}>
                 <h3  id={styles.footer_card_5}>
                    Connect with us
                 </h3>
@@ -125,7 +126,8 @@ export const Footer = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>   
+            </div>  
             <div id={styles.footer_card_11}>
               <h1  id={styles.footer_card_12}>
                 Fresh Fruits and Vegetables Grocery Shopping Online
@@ -182,8 +184,7 @@ export const Footer = () => {
             </div>
             <div id={styles.copyright}>
                <div id={styles.colorText}> © Copyrights 2022-2023. Fraazo. All Rights Reserved.</div>
-            
-          </div>
+            </div>
         </div>
       </div>
          </ChakraProvider>

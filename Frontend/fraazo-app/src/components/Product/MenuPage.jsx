@@ -62,7 +62,7 @@ const MenuPage = () => {
   return (
     <div className={styles.menu_page_container}>
       <div className={styles.menu_page_left_container}>
-        <Accordion allowToggle>
+        <Accordion allowToggle style={{width:"100%"}}>
           <AccordionItem>
             {({ isExpanded }) => (
               <>

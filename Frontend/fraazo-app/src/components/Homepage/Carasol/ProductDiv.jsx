@@ -15,7 +15,7 @@ const ProductDiv = ({ data }) => {
   return (
     <>
       <img
-        style={{ width: "100", backgroundColor: "#f9f9f9" }}
+        style={{ width: "100%", backgroundColor: "#f9f9f9" }}
         src={data.image}
         alt="product_image"
       />

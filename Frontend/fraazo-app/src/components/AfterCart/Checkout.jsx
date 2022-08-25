@@ -12,7 +12,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   console.log(userId);
 
-  const { cartTotal, setCartTotal } = useContext(CartContext);
+  const { setCartTotal } = useContext(CartContext);
 
   useEffect(() => {
     const getCart = async () => {
