@@ -76,3 +76,19 @@
     margin-right:5px;
     margin-left:10px
 }
+
+@media all and (max-width:680px){
+    .menu_page_container{
+        display: grid;
+        grid-template-columns: 100%;
+        justify-content: flex-start; 
+        margin-right: 40px;
+    }
+    .menu_page_left_container{
+        width:100%
+    }
+    .menu_page_right_container{
+        /* background-color: #111; */
+       width:100%
+    }
+}

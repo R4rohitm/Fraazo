@@ -6,18 +6,19 @@
     grid-template-columns: 60% 30%;
     gap:10px;
     justify-content: center;
-    font-family: Quicksand,sans-serif
+    font-family: Quicksand,sans-serif;
+    margin-top:20px;
 }
 .checkout_left_container{
     min-height:400px;
     max-height:auto;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding:0px 20px;
+    padding:20px;
 }
 .checkout_right_container{
     height:300px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding:0px 20px;
+    padding:20px;
 }
 .checkoutitem_container{
     display: grid;
@@ -79,4 +80,18 @@ hr{
     width: 100%;
     margin-top:30px;
     font-size: 12px;
+}
+
+@media all and (max-width:1000px){
+    .checkout_container{
+        width:100%;
+        grid-template-columns: 80%;
+        margin-top:20px;
+    }
+}
+@media all and (max-width:800px){
+    .checkoutitem_container{
+        grid-template-columns: 20% 30% 25% 25%;
+        gap:30px;
+    }
 }

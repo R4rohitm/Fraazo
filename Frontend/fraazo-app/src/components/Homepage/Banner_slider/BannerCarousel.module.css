@@ -36,3 +36,13 @@
 .right_slider_3 {
   width: 100%;
 }
+
+@media all and (max-width:780px){
+  .right_slider{
+    display: none;
+  }
+  .left_slider {
+    width: 100%;
+    padding-right: 0px;
+  }
+}
