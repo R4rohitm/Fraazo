@@ -10,7 +10,7 @@ const Checkout = () => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
 
-  const { cartTotal, setCartTotal } = useContext(CartContext);
+  const { setCartTotal } = useContext(CartContext);
 
   useEffect(() => {
     const getCart = async () => {
@@ -28,14 +28,10 @@ const Checkout = () => {
     getCart();
   }, []);
 
-  // let cutpeeledsprouts = product.filter((el) => {
-  //   return el.category === "vegetables" && el.subcategory === "cuts";
-  // });
   let price = product.reduce((acc, el) => {
     return acc + parseInt(el.price);
   }, 0);
 
-  //console.log(price,cutpeeledsprouts)
   let total = price - 25;
   setCartTotal(total);
 
